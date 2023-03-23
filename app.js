@@ -19,7 +19,8 @@ const sql = 'SELECT * FROM tgfpro LIMIT 10';
 app.get('/', async (req, res) => {
   try {
     const [rows, fields] = await pool.execute(sql);
-    res.send(rows);
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(rows));
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
